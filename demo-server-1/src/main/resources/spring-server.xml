@@ -9,13 +9,15 @@
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-<!--扫描需求发布的服务所在的包-->
+<!--扫描需求发布的服务所在的包，，，，，这么简单扫描一遍就算是发布上去了？？？？？原理是什么？？-->
     <context:component-scan base-package="com.yingjun.rpc.service.impl"/>
     <context:property-placeholder location="classpath:system.properties"/>
 
     <!--服务端配置-->
     <bean id="rpcServer" class="com.yingjun.rpc.server.RPCServer">
         <constructor-arg name="zookeeper" value="${zookeeper.address}"/>
+        <!--value在idea里面显示出来是system.properties文件里面的 值，但是不是配置了两边，这是idea的优先显示！！！！，，之前还以为是两遍重复配置-->
+        <!--这个应该是构造函数的参数的意思-->
         <constructor-arg name="serverAddress" value="${server.address}"/>
     </bean>
 

@@ -16,6 +16,8 @@
     <context:property-placeholder location="classpath:system.properties"/>
 
     <!--服务端配置-->
+    <!--理解成做一个bean，内部在做bean的过程中就会把netty启动起来等到接受RPCRequest这个类型的消息，并且返回RPCResponse类型的消息
+    ，并且把自己的ip和port注册到zk上，叫做服务注册-->
     <bean id="rpcServer" class="com.yingjun.rpc.server.RPCServer">
         <constructor-arg name="zookeeper" value="${zookeeper.address}"/>
         <constructor-arg name="serverAddress" value="${server.address}"/>

@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 相同接口handler？？？？？
+ *
+ * 负载均衡在这里用的是轮询，我可以改成加权或者hash，，就算是一个小的点也行啊， TODO
+ *
  * @author yingjun
  */
 public class SameInterfaceRPCHandlers {

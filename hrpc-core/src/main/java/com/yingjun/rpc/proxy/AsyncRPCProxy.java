@@ -24,8 +24,11 @@ public class AsyncRPCProxy<T> {
 
     /**
      * 异步调用方法
-     * @param funcName
-     * @param args
+     *
+     * 这是客户端，异步调用的入口函数
+     * @param funcName 我需要的方法的名字
+     * @param callback 回调函数
+     * @param args   传入的参数
      * @return
      */
     public RPCFuture call(String funcName, AsyncRPCCallback callback, Object... args) {

@@ -21,6 +21,10 @@ public class ServiceRegistry {
     private String address;//注册中心地址
     private ZooKeeper zooKeeper;
 
+    /**
+     * 这是构造函数
+     * @param address
+     */
     public ServiceRegistry(String address) {
         this.address = address;
         //连接zookeeper
@@ -77,6 +81,8 @@ public class ServiceRegistry {
     private void createInterfaceNode(String interfaceName) {
         try {
             String path = zooKeeper.create(Config.ZK_ROOT_PATH + "/" + interfaceName, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            //接口节点是永久节点
+
             logger.info("create zookeeper interface node (path:{})", path);
         } catch (KeeperException e) {
             logger.error("", e);
@@ -103,7 +109,7 @@ public class ServiceRegistry {
                 createInterfaceNode(interfaceName);
             }
             String path = zooKeeper.create(Config.ZK_ROOT_PATH + "/" + interfaceName + "/" + serverAddress,
-                    serverAddress.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+                    serverAddress.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);//建立临时节点，，，这个节点还在interfaceName下面，
             logger.info("create zookeeper interface address node (path:{})", path);
         } catch (KeeperException e) {
             logger.error("", e);

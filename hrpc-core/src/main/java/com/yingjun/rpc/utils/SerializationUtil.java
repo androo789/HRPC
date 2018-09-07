@@ -12,6 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Serialization Util（Based on Protostuff）
+ * 序列化工具类，就是Protostuff的，就是google的一种二进制转化
+ * 比json 好处是更快，比json的坏处是，二进制没有可读性，但是网络传输不需要可读性
+ * fastjson是json里面最快的，不是所有序列化方法里面最快的
+ *
+ *
  */
 public class SerializationUtil {
 

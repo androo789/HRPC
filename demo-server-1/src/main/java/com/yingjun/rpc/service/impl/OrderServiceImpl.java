@@ -18,9 +18,11 @@ public class OrderServiceImpl implements OrderService {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClientHandler.class);
 
+
     @Override
     public Order getOrder(String uuid) {
         //方便做负载均衡测试，这里做个数据区分
+//        怎么看出负载分区的？？？？？？
         Order order = new Order(uuid, 111, "service1", 15.2F);
         return order;
     }

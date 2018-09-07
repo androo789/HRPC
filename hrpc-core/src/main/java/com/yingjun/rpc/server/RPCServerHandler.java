@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * RPC request processor
  *
+ * SimpleChannelInboundHandler<RPCRequest>在继承的时候，指定了要处理的数据类型，表示每次接收到的数据，都是一个request
  * @author yingjun
  */
 public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
@@ -23,6 +24,11 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
     private static final Logger logger = LoggerFactory.getLogger(RPCServerHandler.class);
     private final Map<String, Object> serviceBeanMap;
 
+
+    /**
+     * 构造函数，map的key是bean的名字，value是bean的对象
+     * @param serviceBeanMap
+     */
     public RPCServerHandler(Map<String, Object> serviceBeanMap) {
         this.serviceBeanMap = serviceBeanMap;
     }
@@ -39,8 +45,15 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
 
 
     @Override
+    /**
+     * 收到数据
+     * 每次接收到的数据都是参数里面final RPCRequest request，
+     * 按照继承的原因，是可以这样写
+     *
+     * 每次接收到消息，放到线程池里面去处理，，，如果不用线程池会怎么样？？？？并发阻塞？？？netty里面是怎么处理并发的？？？TODO
+     */
     public void channelRead0(final ChannelHandlerContext ctx, final RPCRequest request) throws Exception {
-        logger.info("======rpc server channelRead0：" + ctx.channel().remoteAddress());
+        logger.info("======rpc server channelRead0：" + ctx.channel().remoteAddress());//remoteAddress我猜表示远端的ip地址
         RPCServer.submit(new Runnable() {
             @Override
             public void run() {
@@ -64,13 +77,14 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
                     Object result=method.invoke(serviceBean, parameters);*/
 
                     // 避免使用 Java 反射带来的性能问题，我们使用 CGLib 提供的反射 API
+                    // 有什么问题？按照网上的说法，cglib调用快，创建慢，但是性能上我看起来也差不多
                     FastClass serviceFastClass = FastClass.create(serviceBean.getClass());
                     FastMethod serviceFastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
                     Object result = serviceFastMethod.invoke(serviceBean, parameters);
 
-                    response.setResult(result);
+                    response.setResult(result);//怎么获取返回值类型？？应该是两边规定好，直接就是知道的
                 } catch (Exception e) {
-                    response.setError(e.getMessage());
+                    response.setError(e.getMessage());//如果出错了，才设置错误
                     logger.error("Exception", e);
                 }
                 ctx.writeAndFlush(response).addListener(new ChannelFutureListener() {

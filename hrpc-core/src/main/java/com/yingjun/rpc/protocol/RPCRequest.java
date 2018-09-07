@@ -3,11 +3,14 @@ package com.yingjun.rpc.protocol;
 /**
  * 请求包
  *
+ * 这类是干啥的？？？
+ *
  * @author yingjun
  */
 public class RPCRequest {
 
-    private String requestId;
+    private String requestId;//这个id是干啥用的？？？看见过忘了？？？ TODO
+    //注意这里虽然是一个id，但是类型是string，而不是int！！！
     private String className;
     private String methodName;
     private Object[] parameters;

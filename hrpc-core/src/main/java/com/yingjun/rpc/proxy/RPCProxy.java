@@ -14,6 +14,9 @@ import java.util.UUID;
 
 /**
  * 同步调用代理对象
+ *
+ * 这个就不需要注释了吧，常规的jdk代理套路
+ *
  */
 public class RPCProxy<T> implements InvocationHandler {
     private static final Logger logger = LoggerFactory.getLogger(RPCProxy.class);
@@ -35,7 +38,7 @@ public class RPCProxy<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         RPCRequest request = new RPCRequest();
-        request.setRequestId(UUID.randomUUID().toString());
+        request.setRequestId(UUID.randomUUID().toString());//同步和异步一样，uuid都是java的UUID生成的
         request.setClassName(method.getDeclaringClass().getName());
         request.setMethodName(method.getName());
         request.setParameterTypes(method.getParameterTypes());

@@ -18,14 +18,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * 客户端测试
+ * 这个结构也很好呀，客户端就是直接从测试类，测试文件夹里面启动的，
  *
  * @author yingjun
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-client.xml")
+@RunWith(SpringJUnit4ClassRunner.class)   //我猜意思是，这个类是一个spring测试类，，，所以才能在方法上面用@test注解,,,,猜的不准确
+//这种写法是为了让测试在Spring容器环境下执行。是允许这个类从spring的容器里面取出来bean，，比如下面的RPCClient就是从容器中取出来的
+@ContextConfiguration("classpath:spring-client.xml") //这个就好猜了，这个是配置spring的bean,,通过xml配置
 public class ClientBaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(RPCClientHandler.class);
+    //LoggerFactory是slf4j里面的，Logger是log4j里面的
+    //依赖的Logger变了，而且，slf4j的api还能使用占位符，很方便
+
+
+
     @Autowired
     private RPCClient rpcClient;
 
@@ -97,6 +104,9 @@ public class ClientBaseTest {
 
     /**
      * 测试负载均衡
+     *
+     * 终于知道是什么意思了，，，根据github上的那个图，order接口在两台机器上都有，，，所有这里会有一个负载均衡，，
+     * 还没看到负载均衡的代码在哪里？？？看到了是一个
      */
     @Test
     public void testSLB() {

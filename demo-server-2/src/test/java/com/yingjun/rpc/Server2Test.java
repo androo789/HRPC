@@ -7,6 +7,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author yingjun
+ *
+ * 这个是服务端，发布这个接口！！！
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-server.xml")
