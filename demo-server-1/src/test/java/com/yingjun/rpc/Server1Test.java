@@ -12,6 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("classpath:spring-server.xml")
 public class Server1Test {
 
+    /**
+     * 这个test竟然不会退出，竟然是一直运行的？？？？为什么
+     */
     @Test
     public void startServer1(){
 

@@ -72,6 +72,7 @@ public class RPCServer implements BeanNameAware, BeanFactoryAware, ApplicationCo
     @Override
     /**
      * 这个函数也可能是某种自动调用具体还不清楚？？运行一遍就清楚了，String s会被自动注入
+     * 根据调试的log知道了，setBeanName>setBeanFactory>setApplicationContext>afterPropertiesSet
      */
     public void setBeanName(String s) {
         logger.info("setBeanName() {}", s);

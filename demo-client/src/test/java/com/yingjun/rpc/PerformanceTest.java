@@ -31,10 +31,10 @@ public class PerformanceTest {
 
     private int requestNum = 100000;
     private AtomicInteger successUmn = new AtomicInteger(0);
-    private AtomicInteger failedNum = new AtomicInteger(0);
+    private AtomicInteger failedNum = new AtomicInteger(0);//这是基于CAS的原子类
 
     /**
-     * 性能测试
+     * 性能测试  测试了10万次，异步调用
      */
     @Test
     public void testPerformance() {

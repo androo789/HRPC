@@ -62,7 +62,7 @@ public class ConnectManage {
     /**
      * connectManage是  volatile
      * 这是懒汉模式双重加锁
-     * 为什么使用单例？？？？连接管理器只能有一个？？  TODO
+     * 为什么使用单例？？？？连接管理器只能有一个？？  因为要处理全局的事情，所以只能有一个
      * @return
      */
     public static ConnectManage getInstance() {

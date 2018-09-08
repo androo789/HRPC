@@ -98,9 +98,21 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
     }
 
 
+    /**
+     *  TODO
+     * /127.0.0.1:59888|远程主机强迫关闭了一个现有的连接。
+     * 看了这个log，，，，这是为什么？？？调用完成以后的log
+     * 可能是断开连接？？为什么是异常？？？
+     *
+     * cause.getMessage()竟然还说中文？？神奇？？
+     *
+     * 客户端没有指定关闭连接吧？？？？我没看见这个代码吧？？？？客户端每次连接以后就关闭连接？？？
+     * @param ctx
+     * @param cause
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         logger.error("rpc server caught exception: " + ctx.channel().remoteAddress() + "|" + cause.getMessage());
-        ctx.close();
+        ctx.close();//这个close是什么意思？？关闭连接？？？？看函数的英语解释确实是，，但是更进一步的原来还不知道
     }
 }
