@@ -12,6 +12,9 @@ import java.util.concurrent.CountDownLatch;
 /**
  * RPC服务注册中心
  *
+ * 现在这个注册也有问题，，，，，，就是如果长时间不操作，就会自己断开，，log上写什么超时 ,,,TODO
+ * 断开的意思就是下面的那些ip节点就没有了
+ *
  * @author yingjun
  */
 public class ServiceRegistry {

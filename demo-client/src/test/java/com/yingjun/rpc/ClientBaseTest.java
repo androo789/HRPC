@@ -90,6 +90,10 @@ public class ClientBaseTest {
 
     /**
      * 同步调用测试
+     *
+     * 按照观察，调用以后，客户端会关闭和 服务端的  netty连接，然后服务端的netty会报 远程连接断开
+     * 但是我还没有找到客户端的关闭连接代码？？？？  TODO
+     *
      */
     @Test
     public void testInvokeBySync() {
