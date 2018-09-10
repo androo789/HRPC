@@ -44,7 +44,6 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
     }
 
 
-    @Override
     /**
      * 收到数据
      * 每次接收到的数据都是参数里面final RPCRequest request，
@@ -52,6 +51,7 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
      *
      * TODO 每次接收到消息，放到线程池里面去处理，，，如果不用线程池会怎么样？？？？并发阻塞？？？netty里面是怎么处理并发的？？？
      */
+    @Override
     public void channelRead0(final ChannelHandlerContext ctx, final RPCRequest request) throws Exception {
         logger.info("======rpc server channelRead0：" + ctx.channel().remoteAddress());//remoteAddress我猜表示远端的ip地址
         RPCServer.submit(new Runnable() {

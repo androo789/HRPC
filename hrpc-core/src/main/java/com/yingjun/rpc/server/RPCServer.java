@@ -69,30 +69,33 @@ public class RPCServer implements BeanNameAware, BeanFactoryAware, ApplicationCo
         serviceRegistry = new ServiceRegistry(zookeeper);
     }
 
-    @Override
     /**
      * 这个函数也可能是某种自动调用具体还不清楚？？运行一遍就清楚了，String s会被自动注入
      * 根据调试的log知道了，setBeanName>setBeanFactory>setApplicationContext>afterPropertiesSet
      */
+    @Override
     public void setBeanName(String s) {
         logger.info("setBeanName() {}", s);
     }
 
-    @Override
+
     /**
      * beanFactory这个参数会被，spring自动注入
      */
+    @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         logger.info("setBeanFactory()");
     }
 
-    @Override
+
+
     /**
      * 这个在哪里被调用？？？？会因为ApplicationContextAware而自动调用？？
      * ApplicationContext ctx会被 spring自动注入
      *
      * 这个函数是spring框架里面的，是server端的入口函数之一
      */
+    @Override
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
         logger.info("setApplicationContext()");
         //扫描含有@RPCService的注解类
@@ -113,7 +116,7 @@ public class RPCServer implements BeanNameAware, BeanFactoryAware, ApplicationCo
         }
     }
 
-    @Override
+
     //在实例被创建时执行，后续即是init-method
     //创建netty服务
     /**
@@ -121,6 +124,7 @@ public class RPCServer implements BeanNameAware, BeanFactoryAware, ApplicationCo
      *
      * 这里相当于建立了netty的服务器端，通过ServerBootstrap看出来的，它带一个server单词
      */
+    @Override
     public void afterPropertiesSet() throws Exception {
         logger.info("afterPropertiesSet()");
         EventLoopGroup bossGroup = new NioEventLoopGroup();

@@ -34,23 +34,23 @@ public abstract class RPCClientHandler extends SimpleChannelInboundHandler<RPCRe
         handlerCallback(channel.pipeline().get(RPCClientHandler.class), true);
     }
 
-    @Override
     /**
      * channelInactive是怎么回事？？？只要建立链接以后是不是一直inactive，那是不是不停回调？nonononono
      * inactive里面的in是不的意思，，，整个的意思是	"当前channel不活跃的时候，也就是当前channel到了它生命周期末"
      * 就是结束的时候吧，，就调用这个函数
      */
+    @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
         handlerCallback(channel.pipeline().get(RPCClientHandler.class), false);
     }
 
-    @Override
     /**
      * 如果收到消息，这个消息就应该是服务器端函数运行的结果，返回过来了
      * 接受到的消息就是RPCResponse response
      * TODO 看程序log，应该是我发送消息，然后接收消息，然后强制关闭了连接，关闭连接代码应该在这附近，但是没看见？？？？
      */
+    @Override
     public void channelRead0(ChannelHandlerContext ctx, RPCResponse response) throws Exception {
         String requestId = response.getRequestId();
         RPCFuture rpcFuture = pending.get(requestId);
