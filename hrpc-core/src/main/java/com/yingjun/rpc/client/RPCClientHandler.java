@@ -49,6 +49,7 @@ public abstract class RPCClientHandler extends SimpleChannelInboundHandler<RPCRe
     /**
      * 如果收到消息，这个消息就应该是服务器端函数运行的结果，返回过来了
      * 接受到的消息就是RPCResponse response
+     * TODO 看程序log，应该是我发送消息，然后接收消息，然后强制关闭了连接，关闭连接代码应该在这附近，但是没看见？？？？
      */
     public void channelRead0(ChannelHandlerContext ctx, RPCResponse response) throws Exception {
         String requestId = response.getRequestId();

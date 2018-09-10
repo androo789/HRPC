@@ -90,6 +90,8 @@ public class RPCServer implements BeanNameAware, BeanFactoryAware, ApplicationCo
     /**
      * 这个在哪里被调用？？？？会因为ApplicationContextAware而自动调用？？
      * ApplicationContext ctx会被 spring自动注入
+     *
+     * 这个函数是spring框架里面的，是server端的入口函数之一
      */
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
         logger.info("setApplicationContext()");

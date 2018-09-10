@@ -199,6 +199,7 @@ public class ServiceDiscovery {
                 .build();
 
         client.start();
+        logger.info("连接zk集群，ok了");
 
     }
 

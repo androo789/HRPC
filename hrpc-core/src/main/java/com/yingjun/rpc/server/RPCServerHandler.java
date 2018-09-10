@@ -50,7 +50,7 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
      * 每次接收到的数据都是参数里面final RPCRequest request，
      * 按照继承的原因，是可以这样写
      *
-     * 每次接收到消息，放到线程池里面去处理，，，如果不用线程池会怎么样？？？？并发阻塞？？？netty里面是怎么处理并发的？？？TODO
+     * TODO 每次接收到消息，放到线程池里面去处理，，，如果不用线程池会怎么样？？？？并发阻塞？？？netty里面是怎么处理并发的？？？
      */
     public void channelRead0(final ChannelHandlerContext ctx, final RPCRequest request) throws Exception {
         logger.info("======rpc server channelRead0：" + ctx.channel().remoteAddress());//remoteAddress我猜表示远端的ip地址
@@ -99,8 +99,8 @@ public class RPCServerHandler extends SimpleChannelInboundHandler<RPCRequest> {
 
 
     /**
-     *  TODO
-     * /127.0.0.1:59888|远程主机强迫关闭了一个现有的连接。
+     *  TODO   /127.0.0.1:59888|远程主机强迫关闭了一个现有的连接。
+     *
      * 看了这个log，，，，这是为什么？？？调用完成以后的log
      * 可能是断开连接？？为什么是异常？？？
      *

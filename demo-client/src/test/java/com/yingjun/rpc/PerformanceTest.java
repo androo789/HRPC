@@ -69,6 +69,4 @@ public class PerformanceTest {
         logger.info("-------- {} request failedNum:{}", requestNum, failedNum.intValue());
 
     }
-
-
 }
